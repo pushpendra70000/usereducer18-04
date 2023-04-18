@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import { useReducer } from 'react';
 import './App.css';
 
+let oldState = {
+  value:0
+}
+
+let reducerFunc = (oldState,action) =>{
+  //console.log(oldState)
+  console.log(oldState.value.filter())
+  /*if(action.type='ADDITION'){
+    console.log(oldState,action.value + 1)
+  }else{
+      return oldState
+  }
+  /*switch(action.type){
+      case 'ADDITION':
+        return {...oldState,value:oldState.value + 1};
+        break ;
+      case 'SUBSTRACTION':
+        return {...oldState,value:oldState.value - 1}
+        break ;
+
+      default :
+    }*/
+    return oldState
+}
+
 function App() {
+  const[newState,dispatch] = useReducer(reducerFunc,oldState)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{newState.value}</h1>
+      <button onClick={()=>{dispatch({type:"ADDITION",payload:5 })}}>ADD</button>
+      <button onClick={()=>{dispatch({type:"SUBSTRACTION"})}}>SUB</button>
     </div>
   );
 }
